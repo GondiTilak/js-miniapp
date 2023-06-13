@@ -62,6 +62,7 @@
                 <b>JS window.open: </b>
                 <a class="button" onclick="window.open('https://www.google.com')" target="_blank" id="new-window-js">Google</a>
                 <input type=button onClick='window.open("https://www.google.com/", "_blank")' value='Open Google' id="new-window-js" />
+                <button onclick="myFunction()">Ok Google</button>
             </li>
         </ul>
 
@@ -95,6 +96,10 @@
                     return false;
                 }
                 return true;
+            }
+
+            function myFunction() {
+                window.open("http://www.google.com/", "_blank");
             }
 
             (function() {
