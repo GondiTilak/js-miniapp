@@ -15,14 +15,14 @@ import {
 } from '../../js-miniapp-bridge/src';
 import { UserInfoProvider, UserInfo } from './modules/user-info';
 import { ChatService } from './modules/chat-service';
-import { getBridge } from './sdkbridge';
+import { getBridge, getElectronBridge } from './sdkbridge';
 import { deprecate } from 'util';
 import { SecureStorageService } from './modules/secure-storage';
 import { UniversalBridge } from './modules/universal-bridge';
 import { MiniAppUtils } from './modules/utils';
 import { Purchases } from './modules/in-app-purchase';
 import { CookieManager } from './modules/cookie-manager';
-import { BridgeInfoConverter } from './modules/bridge-info-converter';
+
 /**
  * A module layer for webapps and mobile native interaction.
  */
@@ -268,11 +268,12 @@ export class MiniApp implements MiniAppFeatures, Ad, Platform {
   }
 
   getHostEnvironmentInfo(): Promise<HostEnvironmentInfo> {
+    console.log(getBridge().platform);
     return getBridge()
       .getHostEnvironmentInfo()
       .then(info => {
         info.platform = getBridge().platform as HostPlatform;
-        return BridgeInfoConverter.convertJsonToPlatformInfo(info);
+        return info;
       });
   }
 
@@ -286,5 +287,11 @@ export class MiniApp implements MiniAppFeatures, Ad, Platform {
 
   setCloseAlert(alertInfo: CloseAlertInfo): Promise<string> {
     return getBridge().setCloseAlert(alertInfo);
+  }
+}
+
+declare global {
+  interface Window {
+    linkDesktop: MiniApp;
   }
 }

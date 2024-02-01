@@ -34,9 +34,6 @@ type LandingProps = {
   sdkVersion: ?string,
   hostLocale: ?string,
   infoError: string,
-  hostBuildType?: string,
-  deviceToken?: string,
-  pushToken?: string,
   getHostInfo: Function,
   onSecureStorageReady: Function,
   secureStorageStatus: string,
@@ -212,39 +209,6 @@ const Landing = (props: LandingProps) => {
           </ListItemAvatar>
           <ListItemText primary="Dark mode" secondary={String(darkMode)} />
         </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <LanguageRoundedIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Build Type:"
-            secondary={String(props.hostBuildType) || '-'}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <LanguageRoundedIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Device Token:"
-            secondary={props.deviceToken ?? '-'}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <LanguageRoundedIcon />
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText
-            primary="Push Token:"
-            secondary={props.pushToken ?? '-'}
-          />
-        </ListItem>
       </List>
     </CardContent>
   );
@@ -273,9 +237,6 @@ const mapStateToProps = (state, props) => {
     sdkVersion: state.info.sdkVersion,
     hostLocale: state.info.hostLocale,
     infoError: state.info.infoError,
-    hostBuildType: state.info.hostBuildType,
-    deviceToken: state.info.deviceToken,
-    pushToken: state.info.pushToken,
     secureStorageStatus:
       (state.secureStorageStatus.isReady && 'Ready') ||
       state.secureStorageStatus.error ||

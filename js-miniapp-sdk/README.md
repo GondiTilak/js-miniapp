@@ -53,6 +53,7 @@ window.MiniApp.default.getMessagingUniqueId()
     .then(id => {
     // ...
 ```
+</dl>
 </dd>
 
 
@@ -117,6 +118,7 @@ Here is the example of manifest. You can also see [it](https://github.com/rakute
   }
 }
 ```
+</dl>
 </dd>
 
 
@@ -136,14 +138,13 @@ Here is the example of manifest. You can also see [it](https://github.com/rakute
 - [In-App Purchases](#in-app-purchases)
 - [Get Points](#get-points)
 - [Check Platform - Android/iOS](#get-platform)
-- [Host Environment Info](#get-host-info)
+- [Get Host Environment Info](#get-host-info)
 - [Download file](#download-file)
 - [Secure storage](#secure-storage)
 - [Host app theme colors](#host-theme-colors)
 - [isDarkMode](#dark-mode)
 - [Send Analytics](#send-analytics)
 - [Get Cookies](#get-cookies)
-- [MiniApp Storage][#miniapp-storage]
 
 
 ### Retrieve a unique ID
@@ -206,7 +207,7 @@ Here is the example of manifest. You can also see [it](https://github.com/rakute
         console.error(error);
       });
     ```
-
+</dl>
 </dd>
 
 ### Request Permissions
@@ -331,7 +332,7 @@ MiniApp
   });
 ```
 
-
+</dl>
 </dd>
 
 ### Show Ads
@@ -386,7 +387,7 @@ MiniApp
   })
   .catch(error => console.error(response));
 ```
-
+</dl>
 </dd>
 
 ## Events
@@ -458,7 +459,7 @@ These `HostAppEvents` will be triggered when the host app wants to notify someth
   </details>
 
 </dd>
-
+</dl>
 
 ## Share Info
 
@@ -484,7 +485,7 @@ MiniApp
   .catch(error => console.error(error));
 ```
 </dd>
-
+</dl>
 
 ## Requesting User details
 
@@ -589,7 +590,7 @@ MiniApp.user
   .catch(error => console.error(error));
 ```
 </dd>
-
+</dl>
 
 ## Set screen orientation
 
@@ -619,7 +620,7 @@ MiniApp
 ```
 
 </dd>
-
+</dl>
 
 ### Send message
 
@@ -678,7 +679,7 @@ MiniApp.chatService
   });
 ```
 
-
+</dl>
 </dd>
 
 ### Open device camera
@@ -699,7 +700,7 @@ Please make sure that `capture` attribute is available, it will open device came
 </html>
 ```
 
-
+</dl>
 </dd>
 
 <div id='set-close-alert'/>
@@ -729,7 +730,7 @@ When a Mini app is closed, you can set the close confirmation popup which the ho
     });
   });
   ```
-
+</dl>
 </dd>
 
 <div id='universal-bridge'/>
@@ -800,7 +801,7 @@ window.addEventListener(HostAppEvents.RECEIVE_JSON_INFO, function(e) {
 });
 ```
 
-
+</dl>
 </dd>
 
 <div id='close-miniapp'/>
@@ -819,7 +820,7 @@ MiniApp.miniappUtils.closeMiniApp(true).catch((error) => {
 });
 ```
 
-
+</dl>
 </dd>
 
 <div id='in-app-purchases'/>
@@ -905,7 +906,7 @@ MiniApp.user
     });
 ```
 
-
+</dl>
 </dd>
 
 <div id='get-platform'/>
@@ -928,7 +929,7 @@ const platform = MiniApp.getPlatform();
 
 When it is not running by Android/iOS, the return value is `Unknown`.
 
-
+</dl>
 </dd>
 
 <div id='get-host-info'/>
@@ -940,7 +941,7 @@ When it is not running by Android/iOS, the return value is `Unknown`.
 
 **API:** [MiniAppFeatures.getHostEnvironmentInfo](api/interfaces/miniappfeatures.html#gethostenvironmentinfo)
 
-Native host application can share the information such as Locale, Host app version, Host app Build type, SDK version, device token and push token using this interface. Miniapp can fetch these information using the following interface which will get [HostEnvironmentInfo](api/interfaces/hostenvironmentinfo.html) as a promise.
+Native host application can share the information such as Locale, Host app version, SDK version using this interface. Miniapp can fetch these information using the following interface which will get [HostEnvironmentInfo](api/interfaces/hostenvironmentinfo.html) as a promise
 
 ```javascript
 import MiniApp from 'js-miniapp-sdk';
@@ -955,7 +956,7 @@ MiniApp
     });
 ```
 
-
+</dl>
 </dd>
 
 <div id='download-file'/>
@@ -983,7 +984,7 @@ import MiniApp from 'js-miniapp-sdk';
 ```
 
 
-
+</dl>
 </dd>
 
 <div id='secure-storage'/>
@@ -1107,6 +1108,7 @@ import MiniApp from 'js-miniapp-sdk';
       });
     ```
 
+</dl>
 </dd>
 
 <div id='host-theme-colors'/>
@@ -1136,7 +1138,7 @@ import MiniApp from 'js-miniapp-sdk';
 ```
 
 
-
+</dl>
 </dd>
 
 <div id='dark-mode'/>
@@ -1163,6 +1165,8 @@ MiniApp
   });
 ```
 
+
+</dl>
 </dd>
 
 <div id='send-analytics'/>
@@ -1221,90 +1225,6 @@ import MiniApp from 'js-miniapp-sdk';
     .catch((error) => {
       console.log(error);
     });
-
-```
-
-<div id='miniapp-storage'/>
-
-## MiniApp storage using Key/Value <small style="color:green;font-size: 12px">Available from v1.20.0</small>
-
-[Secure storage](#secure-storage) uses database for storing any data from MiniApp. It is recommended for MiniApps that wants to store huge data.
-
-If MiniApp wants to use any storage that is lightweight, then they can use the following interfaces.
-Android uses Shared Preferences and iOS uses UserDefaults for the interfaces below,
-
-
-<dl>
-<dd>
-
-
-**API:** [MiniappPreferenceProvider](api/interfaces/miniapppreferenceprovider.html)
-
-1. [set](api/interfaces/miniapppreferenceprovider.html#set)
-
-```javascript
-import MiniApp from 'js-miniapp-sdk';
-  
-MiniApp.preferences
-  .set(key, value)
-  .then((response) => {
-    // Boolean response whether the value set is successfull
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-```
-
-2. [get](api/interfaces/miniapppreferenceprovider.html#get)
-
-```javascript
-import MiniApp from 'js-miniapp-sdk';
-  
-MiniApp.preferences
-  .get(key)
-  .then((response) => {
-    // Value that is stored for a given key
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-```
-
-3. [remove](api/interfaces/miniapppreferenceprovider.html#remove)
-
-```javascript
-import MiniApp from 'js-miniapp-sdk';
-  
-MiniApp.preferences
-  .remove(key)
-  .then((response) => {
-    // Boolean response whether the remove is successfull
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-```
-
-4. [clearMiniAppPreferences](api/interfaces/miniapppreferenceprovider.html#clearminiapppreferences)
-
-```javascript
-import MiniApp from 'js-miniapp-sdk';
-  
-MiniApp.preferences
-  .clearMiniAppPreferences(key)
-  .then((response) => {
-    // Boolean response whether the clearing storage is successfull
-    console.log(response);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
 ```
 
@@ -1377,6 +1297,7 @@ function getId() {
 
 </details>
 
+</dl>
 </dd>
 
 

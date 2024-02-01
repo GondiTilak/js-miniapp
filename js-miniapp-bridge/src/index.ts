@@ -63,12 +63,6 @@ import {
   ProductPrice,
 } from './types/in-app-purchase';
 import { CookieInfo } from './types/cookie-info';
-import {
-  NotificationDetailedInfo,
-  NotificationInfo,
-  NotificationInfoType,
-  NotificationInfoPriority,
-} from './types/notification/notification-info';
 
 export {
   MiniAppBridge,
@@ -119,8 +113,4 @@ export {
   MAAnalyticsEventType,
   UniversalBridgeInfo,
   CookieInfo,
-  NotificationInfo,
-  NotificationDetailedInfo,
-  NotificationInfoType,
-  NotificationInfoPriority,
 };

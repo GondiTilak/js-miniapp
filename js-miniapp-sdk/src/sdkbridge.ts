@@ -5,3 +5,7 @@ export function getBridge() {
   // tslint:disable:no-any
   return (window as any).MiniAppBridge as MiniAppBridge;
 }
+
+export function getElectronBridge() {
+  return window.linkDesktop;
+}
